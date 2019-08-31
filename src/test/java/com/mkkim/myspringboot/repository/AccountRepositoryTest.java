@@ -1,12 +1,10 @@
 package com.mkkim.myspringboot.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertThat;
 
 import java.util.Optional;
-import java.util.function.Consumer;
 
-import org.apache.catalina.startup.ClassLoaderFactory.Repository;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,18 +23,18 @@ public class AccountRepositoryTest {
 	
 	@Test
 	public void account() throws Exception {
-//		accountRepository.findAll(new Sort(Direction.DESC, "id"));
-//		Account account = new Account();
-//		account.setUsername("spring");
-//		account.setPassword("spring");
-//		Account newAcct = accountRepository.save(account);
-//		System.out.println(newAcct.getId() + " " + newAcct.getUsername());
-//		assertThat(newAcct).isNotNull();
+		accountRepository.findAll(new Sort(Direction.DESC, "id"));
+		Account account = new Account();
+		account.setUsername("spring");
+		account.setPassword("spring");
+		Account newAcct = accountRepository.save(account);
+		System.out.println(newAcct.getId() + " " + newAcct.getUsername());
+		assertThat(newAcct).isNotNull();
 		
-//		Account existAcct = accountRepository.findByUsername(newAcct.getUsername());
-//		assertThat(existAcct).isNotNull();
-//		Account noExistAcct = accountRepository.findByUsername("test");
-//		assertThat(noExistAcct).isNull();
+		Optional<Account> existAcct = accountRepository.findByUsername(newAcct.getUsername());
+		assertThat(existAcct).isNotNull();
+		Optional<Account> noExistAcct = accountRepository.findByUsername("test");
+		assertThat(noExistAcct).isNull();
 	}
 	
 	@Test
@@ -47,13 +45,13 @@ public class AccountRepositoryTest {
 			
 			System.out.println(account.equals(new Account()));
 		}
-//		optional.ifPresent(acct -> System.out.println(acct.toString()));
-//		optional.ifPresent(System.out::println);
-//		
-//		Optional<Account> notOpt = accountRepository.findByUsername("test");
-//		System.out.println("=================");
-//		notOpt.ifPresent(System.out::println);
-//		Account notAccount = notOpt.orElseThrow(() -> new Exception("username not found"));
-//		System.out.println("=================");
+		optional.ifPresent(acct -> System.out.println(acct.toString()));
+		optional.ifPresent(System.out::println);
+		
+		Optional<Account> notOpt = accountRepository.findByUsername("test");
+		System.out.println("=================");
+		notOpt.ifPresent(System.out::println);
+		Account notAccount = notOpt.orElseThrow(() -> new Exception("username not found"));
+		System.out.println("=================");
 	}
 }

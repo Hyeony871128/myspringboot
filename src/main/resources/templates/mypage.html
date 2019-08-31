@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MY PAGE</title>
+</head>
+<body>
+    <h1>로그인 된 사용자[[${#httpServletRequest.remoteUser}]]</h1>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Logout">
+    </form>
+</body>
+</html>

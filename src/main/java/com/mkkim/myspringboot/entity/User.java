@@ -1,18 +1,28 @@
 package com.mkkim.myspringboot.entity;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class User {
 	@Id
 	@GeneratedValue
+	@JacksonXmlProperty(isAttribute = true)
 	private Long id;
 	@Column
+	@JacksonXmlProperty
+	@NotBlank(message = "Name은 필수 입력 항목입니다!")
 	private String name;
+
+
 	@Column
+	@JacksonXmlProperty
+	@NotBlank(message = "Email은 필수 입력 항목입니다!")
 	private String email;
 	public Long getId() {
 		return id;

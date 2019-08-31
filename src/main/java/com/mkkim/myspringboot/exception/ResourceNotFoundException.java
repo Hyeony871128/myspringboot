@@ -3,7 +3,7 @@ package com.mkkim.myspringboot.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(value = HttpStatus.NOT_FOUND)
+@ResponseStatus(value = HttpStatus.NOT_FOUND)				// 반환하는 오류 => 404
 public class ResourceNotFoundException extends RuntimeException {
 	private String resourceName;
 	private String fieldName;

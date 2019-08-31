@@ -20,11 +20,19 @@ import com.mkkim.myspringboot.exception.ResourceNotFoundException;
 import com.mkkim.myspringboot.repository.UserRepository;
 
 @RestController
+@RequestMapping("/users")
 public class UserRestController {
 	@Autowired
 	private UserRepository repository;
-	
-	@PutMapping("/users/{id}")
+
+	/*
+	Insert	@PostMapping
+	Select	@GetMapping
+	Update	@PutMapping
+	Delete	@DeleteMapping
+	 */
+
+	@PutMapping("/{id}")
 	public User update(@PathVariable Long id, @RequestBody User pUser) {
 		User user = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
 		user.setName(pUser.getName());
@@ -32,23 +40,23 @@ public class UserRestController {
 		return repository.save(user);
 	}
 	
-	@PostMapping("/users")
+	@PostMapping("")
 	public User create(@RequestBody User user) {
 		return repository.save(user);
 	}
 	
-	@GetMapping("/users/{id}")
+	@GetMapping("/{id}")
 	public User getUser(@PathVariable Long id) {
 		return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
 	}
 	
-	@GetMapping("/users")
+	@GetMapping("")
 	public List<User> getUsers(){
 		return repository.findAll();
 	}
 	
-	@DeleteMapping("/users/{id}")
-	public ResponseEntity<String> deleteUser(@PathVariable Long id, @RequestBody User pUser){
+	@DeleteMapping("/{id}")
+	public ResponseEntity<String> deleteUser(@PathVariable Long id, @RequestBody User pUser){		// @PathVariable url상의 데이터 받아오기
 		Optional<User> optional = repository.findById(id);
 		if (optional.isPresent()) {
 			if (optional.get().getName().equals(pUser.getName())) {
